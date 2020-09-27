@@ -1,3 +1,4 @@
+// variables
 var  ground,stoneImg,scene,sceneImg,bananaImg,monkey,monkeyImg,monkeyStop,score,obstacleGroup,foodGroup,gameState;
 
 function preload()
@@ -8,7 +9,7 @@ function preload()
   // monkey animation
   monkeyImg = loadAnimation("Monkey_01.png","Monkey_02.png","Monkey_03.png","Monkey_04.png","Monkey_05.png","Monkey_06.png","Monkey_07.png","Monkey_08.png","Monkey_09.png","Monkey_10.png");
   
-  // Objects in the game
+  // Object images in the game
   stoneImg = loadImage("stone.png");
   sceneImg = loadImage("jungle.jpg");
   bananaImg = loadImage("banana.png");
@@ -25,7 +26,7 @@ function setup()
   scene = createSprite(200,200,5,5);
   scene.addImage("background",sceneImg);
   
-  // monkey
+  // monkey properties
   monkey = createSprite(50,340,10,10);
   monkey.addAnimation("monkey",monkeyImg);
   monkey.scale = 0.1;
@@ -37,16 +38,14 @@ function setup()
   // groups
   obstacleGroup = createGroup();
   foodGroup = createGroup();
-  
-  // fails
-  fail = 0;
 }
 
 function draw() 
 {
   background("white");
-  //console.log(monkey.y);
+  // collitions
   monkey.collide(ground);
+  
   
   if(gameState === "Play")
 {
@@ -110,7 +109,7 @@ function draw()
 }else
   if(gameState === "End")
 {
-  
+  // when the game ends
     scene.velocityX = scene.x *0;
     foodGroup.setVelocityXEach(0);
     obstacleGroup.setVelocityXEach(0);
@@ -119,6 +118,7 @@ function draw()
 }
   
   drawSprites();
+  // didplaying current score
   stroke("white");
   fill("white");
   textSize(20);
@@ -126,6 +126,7 @@ function draw()
   // high score
     if(gameState === "End")
   {
+    // Displaying High score
     stroke("black");
     fill("red");
     textSize(50);
@@ -138,6 +139,7 @@ function draw()
 
 function Obstacles()
 {
+  // Creating the obstacles 
   var stone = createSprite(400,370,5,5);
   stone.addImage("obstable",stoneImg);
   stone.velocityX = -7;
@@ -151,6 +153,7 @@ function Obstacles()
 
 function Food()
 {
+  // Creating the food
   var banana = createSprite(400,200,5,5);
   banana.addImage("food",bananaImg);
   banana.velocityX = -8;
